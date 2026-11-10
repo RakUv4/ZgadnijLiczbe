@@ -1,7 +1,11 @@
 package com.example.zgadnijliczbe;
+import java.util.Random;
 
+import android.graphics.Color;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -9,8 +13,13 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import java.util.ArrayList;
+
 public class MainActivity extends AppCompatActivity {
 
+    private ArrayList<Button> WszystkiePrzyciski = new ArrayList<>();
+
+    private int WylosowanaLiczba;
     private Button button1;
     private Button button2;
     private Button button3;
@@ -24,7 +33,6 @@ public class MainActivity extends AppCompatActivity {
     private Button button11;
     private Button button12;
 
-    private int Kliknietyprzycisk;
 
 
 
@@ -50,6 +58,57 @@ public class MainActivity extends AppCompatActivity {
         button10 = findViewById(R.id.button10);
         button11 = findViewById(R.id.button11);
         button12 = findViewById(R.id.button12);
+
+
+        WszystkiePrzyciski.add(button1);
+        WszystkiePrzyciski.add(button2);
+        WszystkiePrzyciski.add(button3);
+        WszystkiePrzyciski.add(button4);
+        WszystkiePrzyciski.add(button5);
+        WszystkiePrzyciski.add(button6);
+        WszystkiePrzyciski.add(button7);
+        WszystkiePrzyciski.add(button8);
+        WszystkiePrzyciski.add(button9);
+        WszystkiePrzyciski.add(button10);
+        WszystkiePrzyciski.add(button11);
+        WszystkiePrzyciski.add(button12);
+
+        Random rand = new Random();
+
+        WylosowanaLiczba = rand.nextInt(12)+1;
+
+        for(int i = 0; i< WszystkiePrzyciski.size(); i++){
+            if(i+1 == WylosowanaLiczba){
+                int finalI = i;
+                WszystkiePrzyciski.get(i).setOnClickListener(
+                        new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                Toast.makeText(MainActivity.this,
+                                        "Poprawne", Toast.LENGTH_SHORT).show();
+                                WszystkiePrzyciski.get(finalI).setBackgroundColor(Color.GREEN);
+                            }
+                        }
+                );
+
+
+            } else{
+                int finalI1 = i;
+                WszystkiePrzyciski.get(i).setOnClickListener(
+                        new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                Toast.makeText(MainActivity.this,
+                                        "Niepoprawne", Toast.LENGTH_SHORT).show();
+                                WszystkiePrzyciski.get(finalI1).setBackgroundColor(Color.RED);
+                            }
+                        }
+                );
+            }
+        }
+
+
+
 
     }
 }
